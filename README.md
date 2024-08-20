@@ -164,7 +164,7 @@ int main()
 
 ### 2.3 编译
 
-最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`move_sov`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
+最后执行编译，通过以下命令进行编译生成可执行文件`multi_motor`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
 g++ main.cpp   -L../include/can -lmylibscan -lcontrolcan  lbmylibti5_multi_motor -o multi_motor
 ```
