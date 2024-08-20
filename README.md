@@ -84,109 +84,10 @@ sort: 1
       logout();
   ```
 
-
-
-+ void get_elc_info(int size);
-  ```
-  函数功能：获取电机参数
-  返回值：无
-  参数：电机总个数
-  示例：
-      int main()
-      {
-          login();
-          get_elc_info(6);
-          logout();
-          return 0;
-      }
-  ```
-
-+ void set_elc_info(uint32_t *elc_parameterlist,int elc_num, int parameterType,uint32_t elc_value);
-   ```
-   函数功能：设置电机参数
-   返回值：
-   参数：
-       elc_parameterlist 要设置的对应电机，
-       elc_value 要设置的第n个电机，
-       parameterType 要设置的项目，
-       elc_value 新值
-   示例：
-       int main()
-       {
-           login();
-           set_elc_info(reg_position_kp,0,MotorTypeHelper::REG_POSITION_KP, 500);
-           set_elc_info(reg_position_kp,1,MotorTypeHelper::REG_POSITION_KP, 700);
-           set_elc_info(reg_position_kp,2,MotorTypeHelper::REG_POSITION_KP, 800);
-           set_elc_info(reg_position_kp,3,MotorTypeHelper::REG_POSITION_KP, 900);
-           set_elc_info(reg_position_kp,4,MotorTypeHelper::REG_POSITION_KP, 1000);
-           set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_POSITION_KP, 1100);
-           logout();
-           return 0;
-       }
-   ```
-
-+ int get_elektrische_Maschinen_status(int size);
-  ```
-  函数功能：获取电机错误状态
-  返回值：
-      0：无错误
-      1：软件错误
-      2：过压
-      4：欠压
-      16：启动错误
-  参数：电机总个数
-  示例：
-      int main()
-      {
-           login();
-           int num = get_elektrische_Maschinen_status();
-           logout();
-           return 0;
-       }
-  ```
-+ void clear_elc_error(int size);
-  ```
-  函数功能：清除电机错误
-  返回值：无
-  参数：点击总个数
-  示例：
-      int main()
-      {
-          login();
-          if(get_electricity_status() != true)
-          {
-              cout << "电机异常！" << endl;
-          }
-          clear_elc_erro();
-          logout();
-          return 0;
-       }
-  ```
-
-+ void joint_movement(const float *arr);
-   ```
-  函数功能：机械臂关节运动
-  返回值：无
-  参数：各个关节值
-  示例：
-     int main()
-      {
-          login();
-          mechanical_arm_origin();
-          float arr[6]={2.3,3.2,2.2,0,0,0};
-          joint_movement(arr);
-          logout();
-          return 0;
-       }
-  ```
-
-
 ### 1.3 Ti5LOGIC.h
 
 该文件是机械臂的算法库
 使用方法：根据需求在规划机械臂运动的时候可以调用该库的函数。
-
-
 
 
 ### 1.4 tool.h
@@ -201,6 +102,35 @@ sort: 1
 ### 2.1 main.cpp
 
 该文件是一个简单的示例程序
+```
+int main()
+{
+    signal(SIGINT, signalHandler);
+
+    printf("qqqqq\n");
+    
+    canidList = new uint8_t[Num_Len];
+
+    for (int i = 0; i < Num_Len; i++)
+    {
+        canidList[i] = i + 1;
+        cout << "canlist=" << static_cast<int>(canidList[i]) << endl;
+    }
+    
+    login();
+    
+    cout << "登录成功" << endl;
+   
+    std::string serverIP = "192.168.130.64";
+    int port = 12345;
+    socket_server(serverIP,port);//server端
+    
+    deallocate_variable();
+    logout();
+
+    return 0;
+}
+```
 
 ### 2.2 gcc.sh
 
@@ -210,7 +140,7 @@ sort: 1
 
 最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`move_sov`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
-g++ main.cpp  Ti5BASIC.cpp Ti5LOGIC.cpp  mathfunc.cpp  tool.cpp -L../include/can -lmylibscan -lcontrolcan -o multi_motor
+g++ main.cpp   -L../include/can -lmylibscan -lcontrolcan  lbmylibti5_multi_motor -o multi_motor
 ```
 **运行**:
 ```
