@@ -166,6 +166,7 @@ int main()
 
 最后执行编译，通过以下命令进行编译生成可执行文件`multi_motor`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
+注意：需要将usrlib文件夹中的so复制到/usr/lib/下，然后才能编译运行
 g++ main.cpp   -L../include/can -lmylibscan -lcontrolcan  lbmylibti5_multi_motor -o multi_motor
 ```
 **运行**:
