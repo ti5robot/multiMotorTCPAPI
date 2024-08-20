@@ -97,6 +97,32 @@ sort: 1
 ### 1.5 can
 该文件夹包含`can`通讯的头文件，机械臂是通过can通讯与控制机联通的，具体函数功能及参数请查看里面所包含的文件中注释了解函数作用。
 
+### 1.6 socket_service.h
+该文件是socket通信的头文件
++ void socket_parse_data(const std::vector<uint8_t>& values, uint16_t* reconstructedValues,int num_len);
+```
+/*
+ 函数功能：数据处理函数
+ 返回值：无
+ 参数：
+   values:接收到的数据去掉帧头帧尾后的数据（0xaa，电机个数，0xaa，0x55，）
+   reconstructedValues:转换后的角度值
+   num_len:电机数（Num_Len固定传这个变量名）
+*/
+```
++ int socket_server(std::string& serverIP,int port);
+
+```
+/*
+ 函数功能：socket连接函数
+ 参数：
+    serverIP:服务器IP地址
+    port:服务器端口号
+ 返回值：
+    成功返回0，失败返回1
+*/
+```
+
 
 ## 2.src
 ### 2.1 main.cpp
